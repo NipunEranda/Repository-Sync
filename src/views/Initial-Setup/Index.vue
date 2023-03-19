@@ -9,7 +9,8 @@
           Repositories</button>
       </div>
       <div class="mt-2">
-        <button id="gitlab" class="ps-5 pe-5 mt-3 button pointer" @click="openModal('exampleModal', 'gitlab')" disabled>Sync
+        <button id="gitlab" class="ps-5 pe-5 mt-3 button pointer" @click="openModal('exampleModal', 'gitlab')"
+          disabled>Sync
           GitLab
           Repositories</button>
       </div>
@@ -26,8 +27,9 @@
             </button>
           </div>
           <div class="modal-body dark-modal-background dark-modal-foreground">
-            <input class="w-100" type="text" placeholder="Set Token" v-model="token">
-            <input class="w-100 mt-3" type="password" placeholder="Set a password" v-model="password">
+            <input class="w-100" type="text" placeholder="Set Token" v-model="token" @focusout="checkUser()">
+            <label class="mt-1 small" style="color: limegreen;" v-text="user ? user.name : ''"></label>
+            <input class="w-100 mt-3" type="password" placeholder="Set a password" v-model="password" :disabled="!user">
           </div>
           <div class="modal-footer dark-modal-background dark-modal-foreground">
             <button type="button" class="btn btn-secondary" @click="closeModal('exampleModal')">Close</button>
@@ -46,6 +48,8 @@ import * as tauriPath from '@tauri-apps/api/path';
 import * as fs from '@tauri-apps/api/fs';
 import * as os from '@tauri-apps/api/os';
 import { notify, encrypt, decrypt } from "../../utils";
+import { getUserDetails } from '../../utils/github';
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -53,7 +57,8 @@ export default {
       token: '',
       password: '',
       system: null,
-      modal: null
+      modal: null,
+      user: null
     }
   },
   methods: {
@@ -84,6 +89,15 @@ export default {
         });
         $(`#${this.modal}`).modal('hide');
         this.$router.push('/home');
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    checkUser: async function () {
+      try {
+        if (this.token != '') {
+          this.user = await store.dispatch("getUser", this.token);
+        }
       } catch (e) {
         console.log(e);
       }
