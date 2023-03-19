@@ -137,3 +137,24 @@ button {
 .float-right{
   float:right !important;
 }
+
+.dark-modal-background{
+  background-color: #2f2f2f !important;
+}
+
+.dark-modal-foreground{
+  color: #fff !important;
+}
+
+.modal-header{
+  border-bottom-color: #494949;
+}
+
+.modal-footer{
+  border-top-color: #494949;
+}
+
+.modal-close-btn:hover{
+  background-color: red;
+  border-color: red;
+}
