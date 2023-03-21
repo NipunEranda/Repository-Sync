@@ -7,7 +7,7 @@ import store from '../store';
 import * as tauriPath from '@tauri-apps/api/path';
 import * as os from '@tauri-apps/api/os';
 
-const configFile = JSON.parse(await store.dispatch('readFile', `${await tauriPath.documentDir()}RepositorySync${(await os.platform()) == 'win32' ? '\\' : '/'}config.json`));
+let configFile = null;
 
 const routes = [
     {
@@ -35,6 +35,10 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes
+});
+
+router.beforeEach(async (to, from) => {
+    configFile = JSON.parse(await store.dispatch('readFile', `${await tauriPath.documentDir()}RepositorySync${(await os.platform()) == 'win32' ? '\\' : '/'}config.json`));
 });
 
 export default router;
