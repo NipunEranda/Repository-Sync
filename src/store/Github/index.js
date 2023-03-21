@@ -21,16 +21,20 @@ export default {
         }
     },
     mutations: {
-        getUser(state, data) {
+        setGithubToken(state,data){
+            state.githubToken = data;
+        },
+        updateUser(state, data) {
             state.user = data;
         }
     },
     actions: {
-        async getUser(context, data) {
+        async getUser({ commit, state }, data) {
             let response = null;
             try {
                 response = await axios.get(`https://api.github.com/user`, { headers: { Authorization: 'token ' + data } });
-                context.commit("updateUser", response.data);
+                commit("updateUser", response.data);
+                commit("setGithubToken", data);
                 return response.data;
             } catch (e) {
                 console.log(e);

@@ -64,6 +64,17 @@ export default {
             } catch (e) {
                 return null;
             }
+        },
+        async removeFile(context, data){
+            try {
+                if(data.file)
+                    return await fs.removeFile(data.filePath, { dir: data.dir, recursive: true });
+                else
+                    return await fs.removeDir(data.folderPath, { dir: data.dir, recursive: true });
+            } catch (e) {
+                console.log(e);
+                return null;
+            }
         }
         // updateCurrentUser(context, data) {
         //     context.commit("updateCurrentUser", data);

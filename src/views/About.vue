@@ -1,4 +1,4 @@
 <template>
     About
-    <button @click="$router.push('/')">Go to Home</button>
+    <button @click="$router.push('/home')">Go to Home</button>
 </template>

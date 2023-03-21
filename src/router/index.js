@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Index from '../views/Index.vue';
 import About from '../views/About.vue';
-import InitialSetup from '../views/Initial-Setup/Index.vue';
+import InitialSetup from '../views/InitialSetup.vue';
 import Home from '../views/Home.vue';
 import store from '../store';
 import * as tauriPath from '@tauri-apps/api/path';
@@ -22,7 +22,7 @@ const routes = [
     },
     {
         path: '/init',
-        name: 'initial-setup',
+        name: 'InitialSetup',
         component: InitialSetup
     },
     {
@@ -37,8 +37,17 @@ const router = createRouter({
     routes
 });
 
-router.beforeEach(async (to, from) => {
-    configFile = JSON.parse(await store.dispatch('readFile', `${await tauriPath.documentDir()}RepositorySync${(await os.platform()) == 'win32' ? '\\' : '/'}config.json`));
+router.beforeEach((to, from) => {
+    tauriPath.documentDir().then(docDir => {
+        os.platform().then(osPlatform => {
+            store.dispatch('readFile', `${docDir}RepositorySync${osPlatform == 'win32' ? '\\' : '/'}config.json`).then(file => {
+                if(!file)
+                    router.push('/');
+                if(file && from.fullPath == '/init' && to.fullPath == '/')
+                    router.push('/init');
+            });
+        })
+    });
 });
 
 export default router;
