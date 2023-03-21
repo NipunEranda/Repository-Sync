@@ -29,7 +29,7 @@
           <div class="modal-body dark-modal-background dark-modal-foreground">
             <input class="w-100" type="text" placeholder="Set Token" v-model="token" @focusout="checkUser()">
             <label class="mt-1 small" style="color: limegreen;" v-text="user ? user.name : ''"></label>
-            <input class="w-100 mt-3" type="password" placeholder="Set a password" v-model="password" :disabled="!user">
+            <input class="w-100 mt-3" type="password" :placeholder="passwordPlaceHolder" v-model="password" :disabled="!user">
           </div>
           <div class="modal-footer dark-modal-background dark-modal-foreground">
             <button type="button" class="btn btn-secondary" @click="closeModal('exampleModal')">Close</button>
@@ -43,12 +43,12 @@
 
 <script>
 import { useStore } from "vuex";
-import store from "../../store";
+import store from "../store";
 import * as tauriPath from '@tauri-apps/api/path';
 import * as fs from '@tauri-apps/api/fs';
 import * as os from '@tauri-apps/api/os';
-import { notify, encrypt, decrypt } from "../../utils";
-import { getUserDetails } from '../../utils/github';
+import { notify, encrypt, decrypt } from "../utils";
+import { getUserDetails } from '../utils/github';
 import axios from 'axios';
 export default {
   data() {
@@ -56,6 +56,7 @@ export default {
       configFile: null,
       token: '',
       password: '',
+      passwordPlaceHolder: '',
       system: null,
       modal: null,
       user: null
@@ -97,6 +98,8 @@ export default {
       try {
         if (this.token != '') {
           this.user = await store.dispatch("getUser", this.token);
+          if(this.user)
+            this.passwordPlaceHolder = 'Set a password';
         }
       } catch (e) {
         console.log(e);

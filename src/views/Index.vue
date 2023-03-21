@@ -20,8 +20,8 @@ export default {
     },
     methods: {
         goToInit: async function () {
-            this.$router.push('/init');
             await this.createFile();
+            this.$router.push('/init');
         },
         createFile: async function () {
             await store.dispatch("createFile", {

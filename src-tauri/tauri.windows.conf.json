@@ -8,7 +8,9 @@
                 "width": 800,
                 "height": 600,
                 "maximized": false,
-                "decorations": false
+                "decorations": false,
+                "minHeight": 600,
+                "minWidth": 800
             }
         ]
     }
