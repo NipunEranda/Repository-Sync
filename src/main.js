@@ -11,9 +11,9 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 /* import specific icons */
-import { faClose, faWindowMinimize, faWindowMaximize } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faWindowMinimize, faWindowMaximize, faPowerOff, faGear } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faClose, faWindowMinimize, faWindowMaximize);
+library.add(faClose, faWindowMinimize, faWindowMaximize, faPowerOff, faGear);
 
 createApp(App)
 .use(router)

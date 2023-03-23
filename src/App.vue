@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <TitleBar />
-    <router-view />
+    <router-view class="routerView"/>
   </div>
 </template>
 
@@ -32,5 +32,9 @@ export default {
 
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #249b73);
+}
+
+.routerView{
+  padding: 10px;
 }
 </style>
