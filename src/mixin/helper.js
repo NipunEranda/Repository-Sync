@@ -6,6 +6,7 @@ import store from "../store";
 export default {
     methods: {
         async signOut(){
+            localStorage.clear();
             await store.dispatch("removeFile", {file: false, folderPath: `${await tauriPath.documentDir()}RepositorySync`,  dir: fs.BaseDirectory.Document});
         }
     }

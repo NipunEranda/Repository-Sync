@@ -7,13 +7,11 @@ import store from '../store';
 import * as tauriPath from '@tauri-apps/api/path';
 import * as os from '@tauri-apps/api/os';
 
-let configFile = null;
-
 const routes = [
     {
         path: '/',
         name: 'index',
-        component: !configFile ? Index : (configFile.githubToken || configFile.gitLabToken) ? Home : InitialSetup
+        component: Index
     },
     {
         path: '/about',
