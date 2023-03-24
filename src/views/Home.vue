@@ -64,6 +64,7 @@ export default {
             $(".container-loader").removeClass("hidden").addClass("show");
             this.organizations = await store.dispatch("getOrganizations", store.getters.getGithubToken);
             this.repositories = await store.dispatch("getRepositories", store.getters.getGithubToken);
+            console.log(this.repositories);
             $(".container-loader").removeClass("show").addClass("hidden");
         },
         signOut: async function () {
