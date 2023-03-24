@@ -158,3 +158,45 @@ button {
   background-color: red;
   border-color: red;
 }
+
+.loader {
+  margin: auto;
+  border: 15px solid #343a40;
+  border-radius: 50%;
+  border-top: 15px solid #ffffff;
+  width: 125px;
+  height: 125px;
+  animation: spinner 2s linear infinite;
+  z-index: 100;
+  margin-top: 40vh;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.container-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  margin: auto;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}

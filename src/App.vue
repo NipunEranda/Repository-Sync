@@ -1,5 +1,6 @@
 <template>
   <div class="root">
+    <div class="container-loader hidden"><div class="loader"></div></div>
     <TitleBar />
     <router-view class="routerView"/>
   </div>
